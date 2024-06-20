@@ -117,7 +117,7 @@ const loginUser = asyncHandler(async (req,res)=>{
 
     // }
 
-
+    
     const user = await User.findOne({
         $or: [{username}, {email}]
     })
@@ -185,7 +185,7 @@ const logoutUser = asyncHandler (async(req,res) =>{
 const refereshAccessToken = asyncHandler(async(req,res)=>{
     const incomingrefreshToken = req.cookie.refreshToken || req.body.refreshToken
 
-    if (incomingrefreshToken) {
+    if (!incomingrefreshToken) {
         throw new ApiError(401, "unauthorized request")
     }
 
